@@ -1,0 +1,14 @@
+# v1.3.10 December 10, 2013
+# https://github.com/bevry/base
+
+# Temp Files
+**/*.log
+**/.docpad.db
+**/.sass-cache/
+**/node_modules/
+**/out/
+**/public/
+# =====================================
+docpad/src/files/vendor/*
+!docpad/src/files/vendor/bootstrap/
+!docpad/src/files/vendor/jquery.js

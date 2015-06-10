@@ -1,0 +1,21 @@
+{
+  "name": "TestWithCucumber",
+  "version": "0.0.0",
+  "description": "BBD with Cucumber",
+  "main": "index.js",
+  "scripts": {
+    "test": "cucumber.js --format pretty --require test/step_definitions/"
+  },
+  "author": "",
+  "license": "BSD-2-Clause",
+  "dependencies": {
+    "q": "~1.4.1"
+  },
+  "devDependencies": {
+    "chai": "~2.3.0",
+    "chai-as-promised": "~5.0.0",
+    "sinon": "~1.14.1",
+    "sinon-chai": "~2.7.0",
+    "cucumber": "~0.4.9"
+  }
+}
