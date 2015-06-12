@@ -16,13 +16,13 @@ module.exports = function () {
 
 	Given(/^that the system already exist following groups:$/, function (existingGroups, callback) {
 	  this.withExistingGroups(existingGroups);
-	  callback();
+	  callback.pending();
 	});
 
-	Given(/^that I am already logged in$/, function (callback) {
+	Given(/^that user already logged in$/, function (callback) {
 		this.login();
 		expect(this.isLoggedIn).to.be.true;
-		callback();
+		callback.pending();
 	});
 
 	When(/^user enter an existing group name$/, function (callback) {

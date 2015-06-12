@@ -25,7 +25,7 @@ Feature: User create group
     In order to invite others user to join
 
     Background:
-        Given that I am already logged in
+        Given that user already logged in
         And that the system already exist following groups:
             |   Name                                |    Id  |
             |   Morning Practice Football team      |   001  |
