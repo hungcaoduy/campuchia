@@ -9,14 +9,20 @@ chai.use(require("chai-as-promised"));
 
 module.exports = function () {
     var Given = this.Given,
-            When = this.When,
-            Then = this.Then;
+        When = this.When,
+        Then = this.Then;
 
     this.World = require("../support/world.js");
 
-	Given(/^that the system already exist following groups:$/, function (table, callback) {
-	  // Write code here that turns the phrase above into concrete actions
-	  callback.pending();
+	Given(/^that the system already exist following groups:$/, function (existingGroups, callback) {
+	  this.withExistingGroups(existingGroups);
+	  callback();
+	});
+
+	Given(/^that I am already logged in$/, function (callback) {
+		this.login();
+		expect(this.isLoggedIn).to.be.true;
+		callback();
 	});
 
 	When(/^user enter an existing group name$/, function (callback) {
@@ -30,11 +36,6 @@ module.exports = function () {
 	});
 
 	Then(/^the groups list does not changed$/, function (callback) {
-	  // Write code here that turns the phrase above into concrete actions
-	  callback.pending();
-	});
-
-	Given(/^that I am already logged in$/, function (callback) {
 	  // Write code here that turns the phrase above into concrete actions
 	  callback.pending();
 	});

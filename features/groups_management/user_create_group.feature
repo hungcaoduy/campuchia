@@ -7,9 +7,10 @@ Feature: System validate group name
 
     Background:
         Given that the system already exist following groups:
-            |   Morning Practice Football team   |
-            |   Weekend Phuot team  |
-            |   Weekend Bear team   |
+            |   Name                                |    Id     |
+            |   Morning Practice Football team      |  001      |
+            |   Weekend Phuot team                  |   002     |
+            |   Weekend Bear team                   |   003     |
     
     Scenario: User enter an existing group name
         When user enter an existing group name
@@ -26,9 +27,10 @@ Feature: User create group
     Background:
         Given that I am already logged in
         And that the system already exist following groups:
-            |   Morning Practice Football team   |
-            |   Weekend Phuot team  |
-            |   Weekend Bear team   |
+            |   Name                                |    Id  |
+            |   Morning Practice Football team      |   001  |
+            |   Weekend Phuot team                  |   002  |
+            |   Weekend Bear team                   |   003  |
 
     Scenario: User create his first group, with an available name
 
