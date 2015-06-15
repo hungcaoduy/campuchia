@@ -8,6 +8,7 @@
 **/node_modules/
 **/out/
 **/public/
+**/private/
 # =====================================
 docpad/src/files/vendor/*
 !docpad/src/files/vendor/bootstrap/

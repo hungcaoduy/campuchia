@@ -16,6 +16,21 @@
     "chai-as-promised": "~5.0.0",
     "sinon": "~1.14.1",
     "sinon-chai": "~2.7.0",
-    "cucumber": "~0.4.9"
+    "cucumber": "~0.4.9",
+    "express": "~4.12.4",
+    "path": "~0.11.14",
+    "express-resource": "~1.0.0",
+    "express-session": "~1.11.3",
+    "nodemailer": "~1.3.4",
+    "mongoose": "~4.0.5",
+    "body-parser": "~1.13.0",
+    "method-override": "~2.3.3",
+    "errorhandler": "~1.4.0",
+    "connect": "~3.3.5",
+    "morgan": "~1.6.0",
+    "passport-local-mongoose": "~1.0.0",
+    "validator": "~3.40.1",
+    "memoizejs": "~0.1.1",
+    "lodash": "~3.9.3"
   }
 }

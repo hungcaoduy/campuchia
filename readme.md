@@ -7,7 +7,7 @@ Let's think about an web app work as a social network for people to make friends
 ###SPRINT 1: 
 EPIC: User listing
 * Story: User view list of others users *
-* Story: User find others by name
+* Story: User find others by name *
 
 ###SPRINT 2:
 EPIC: Group management
@@ -55,12 +55,3 @@ EPIC: Making friends
 * Story: User follow others
 * Story: System consider two users following each other as friends
 
-**Some technical related sources**
-
-http://vansande.org/2015/03/22/unit_testing_with_mocks_in_node_js/
-
-https://blog.codeship.com/mocha-js-chai-sinon-frontend-javascript-code-testing-tutorial/
-
-http://blog.itviec.com/2014/08/9-tech-blogger-viet-ban-can-biet/
-
-http://strml.net/

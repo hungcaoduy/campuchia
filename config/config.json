@@ -1,0 +1,14 @@
+{
+  "development": {
+    "mongoUrl": "mongodb://localhost/campuchia",
+    "port": 4711
+  },
+  "test": {
+    "mongoUrl": "mongodb://localhost/campuchia",
+    "port": 8080
+  },
+  "production": {
+    "mongoUrl": "mongodb://localhost/campuchia",
+    "port": 80
+  }
+}
