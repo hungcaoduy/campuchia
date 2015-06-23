@@ -1,13 +1,14 @@
-"use strict";
+'use strict';
 
-var validator = require('../lib/validator.js');
 var passportLocalMongoose = require('passport-local-mongoose');
 
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var ObjectId = Schema.ObjectId;
+// var validator = require('../lib/validator.js');
+// var ObjectId = Schema.ObjectId;
+// var options = {};
 
-var User = new Schema({
+/*var User = new Schema({
     username: {
         type: String,
         required: true,
@@ -30,7 +31,14 @@ var User = new Schema({
         type: String
     }
 });
+*/
+var User = new Schema({
+    username: String,
+    password: String
+});
 
+
+// options.usernameField = 'email';
 User.plugin(passportLocalMongoose);
 
 module.exports = mongoose.model('User', User);

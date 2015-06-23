@@ -8,9 +8,9 @@ Feature: User view list of others users
 
     Background
         Given that the system already exist following users:
-            |   Full Name       |   Groups joined   |   Id  |
-            |   Duy Hung Cao    |   001, 002        |   001 |
-            |   Ronaldo Nguyen  |   003             |   002 |
+            |   Full Name       |   Email               |   Groups joined   |   Id  |
+            |   Duy Hung Cao    |   hungcdqt@gmail.com  |   001, 002        |   001 |
+            |   Ronaldo Nguyen  |   ronaldo@gmail.com   |   003             |   002 |
 
     Scenario: Search term is empty
         When search term is empty

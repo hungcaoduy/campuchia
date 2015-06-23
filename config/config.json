@@ -1,7 +1,12 @@
 {
   "development": {
     "mongoUrl": "mongodb://localhost/campuchia",
-    "port": 4711
+    "port": 4711,
+    "GoogleStrategy": {
+      "clientID": "870377607673-hfsl86p1qv2jhej27n1baul9n2csqrqj.apps.googleusercontent.com",
+      "clientSecret": "DZTcbIiGMo0YTn83Sj5z63Qn",
+      "callbackURL": "http://localhost:4711/auth/google/callback"
+    }
   },
   "test": {
     "mongoUrl": "mongodb://localhost/campuchia",
