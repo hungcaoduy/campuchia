@@ -6,6 +6,11 @@
       "clientID": "870377607673-hfsl86p1qv2jhej27n1baul9n2csqrqj.apps.googleusercontent.com",
       "clientSecret": "DZTcbIiGMo0YTn83Sj5z63Qn",
       "callbackURL": "http://localhost:4711/auth/google/callback"
+    },
+    "FacebookStrategy": {
+      "clientID": "855883031133476",
+      "clientSecret": "563e53d37cc3f2255edcf3719cafd85e",
+      "callbackURL": "http://localhost:4711/auth/facebook/callback"
     }
   },
   "test": {

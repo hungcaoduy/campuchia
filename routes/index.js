@@ -1,6 +1,6 @@
 var express = require('express');
 var passport = require('passport');
-var LocalUser = require('../models/user');
+var User = require('../models/account');
 var router = express.Router();
 
 
@@ -13,7 +13,7 @@ router.get('/register', function(req, res) {
 });
 
 router.post('/register', function(req, res) {
-    LocalUser.register(new LocalUser({ username : req.body.username }), req.body.password, function(err, account) {
+    User.register(new User({ username : req.body.username }), req.body.password, function(err, account) {
         if (err) {
             console.log('register err: ', err);
             return res.render('register', {info: 'Sorry. That username already exists. Try again.' + err});
@@ -48,13 +48,13 @@ router.get('/auth/google/callback',
     }
 );
 
-/*router.get('/auth/facebook', passport.authenticate('facebook',{ scope : 'email'}));
+router.get('/auth/facebook', passport.authenticate('facebook',{ scope : 'email'}));
 router.get('/auth/facebook/callback', 
     passport.authenticate('facebook',{ failureRedirect: '/login'}),
     function(req,res){
         res.render('profile', {user : req.user});
     }
 );
-*/
+
 
 module.exports = router;
