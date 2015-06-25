@@ -1,6 +1,6 @@
 var express = require('express');
 var passport = require('passport');
-var User = require('../models/account');
+var User = require('../models/user');
 var router = express.Router();
 
 
@@ -13,7 +13,7 @@ router.get('/register', function(req, res) {
 });
 
 router.post('/register', function(req, res) {
-    User.register(new User({ username : req.body.username }), req.body.password, function(err, account) {
+    User.register(new User({ username : req.body.username }), req.body.password, function(err, user) {
         if (err) {
             console.log('register err: ', err);
             return res.render('register', {info: 'Sorry. That username already exists. Try again.' + err});

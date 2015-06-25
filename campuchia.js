@@ -11,9 +11,10 @@ var bodyParser = require('body-parser');
 
 var path = require('path');
 var logger = require('morgan');
-
+var cookieParser = require('cookie-parser');
 var resource = require('express-resource');
 
+var assert = require('assert');
 
 db.connect(config.mongoUrl);
 
@@ -22,14 +23,19 @@ app.use('/', logger('combined', {immediate: true}));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(bodyParser.json());
-
+app.use(cookieParser());
+app.use(require('express-session')({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: false
+}));
 app.use(methodOverride(function(req, res) {
-  if (req.body && typeof req.body === 'object' && '_method' in req.body) {
-    // look in urlencoded POST bodies and delete it
-    var method = req.body._method;
-    delete req.body._method;
-    return method;
-  }
+    if (req.body && typeof req.body === 'object' && '_method' in req.body) {
+        // look in urlencoded POST bodies and delete it
+        var method = req.body._method;
+        delete req.body._method;
+        return method;
+    }
 }));
 
 // view engine setup
@@ -42,68 +48,26 @@ app.use(express.static(path.join(__dirname, 'public')));
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+var FacebookStrategy = require('passport-facebook').Strategy;
 
 app.use(passport.initialize());
 app.use(passport.session());
 
 
 // passport config
-var LocalUser = require('./models/user'),
-    GoogleUser = require('./models/googleuser');
+var User = require('./models/user');
 
-passport.use(new LocalStrategy(LocalUser.authenticate()));
-// passport.serializeUser(LocalUser.serializeUser());
-// passport.deserializeUser(LocalUser.deserializeUser());
+passport.use(new LocalStrategy(User.authenticate()));
 
-passport.serializeUser(function(user, done) {
-    done(null, user.id);
-});
+passport.serializeUser(User.serializeUserSocialSupport());
+passport.deserializeUser(User.deserializeUserSocialSupport());
 
+passport.use(new GoogleStrategy(config.GoogleStrategy,User.socialAuthenticate('google')));
 
-passport.deserializeUser(function(id, done) {
-    GoogleUser.findById(id,function(err,user){
-        if (err) done(err);
-        if (user) {
-            done(null,user);
-        } else {
-            LocalUser.findById(id, function(err,user){
-                if(err) done(err);
-                done(null,user);
-            });
-        }
-    });
-});
-
-
-passport.use(new GoogleStrategy(config.GoogleStrategy,
-function(accessToken, refreshToken, profile, done) {
-  GoogleUser.findOne({googleID: profile.id}, function(err, oldUser) {
-    if (oldUser) {
-      done(null, oldUser);
-    } else {
-      var newUser = new GoogleUser({
-        googleID: profile.id,
-        email: profile.emails[0].value,
-        name: profile.displayName
-      }).save(function(err, newUser) {
-        if (err) throw err;
-        done(null, newUser);
-      });
-    }
-  });
-}
-));
+passport.use(new FacebookStrategy(config.FacebookStrategy,User.socialAuthenticate('facebook')));
 
 var routes = require('./routes/index');
 app.use('/', routes);
-
-app.get('/users', function(req, res) {
-  req.
-  res.status(200);
-  // res.send('campuchia');
-  res.json({"001":{"name": "Duy Hung Cao", "email": "hungcdqt@gmail.com"},
-    "002":{"name": "Ronaldo Nguyen", "email": "ronaldo@gmail.com"}});
-});
 
 // var usersHandler = require('./routes/users_res')(db);
 // app.resource('users', usersHandler);
@@ -111,6 +75,6 @@ app.get('/users', function(req, res) {
 module.exports = app;
 
 if (!module.parent) {
-  app.listen(config.port);
-  console.log('(%s) app listening on port %s', app.get('env'), config.port);
+    app.listen(config.port);
+    console.log('(%s) app listening on port %s', app.get('env'), config.port);
 }
