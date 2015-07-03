@@ -2,9 +2,7 @@
 console.log('App process id (pid): %s', process.pid);
 
 var express = require('express');
-var app = express();
 var db = require('./lib/db');
-var config = require('./config/config.json')[app.get('env')];
 
 var methodOverride = require('method-override');
 var bodyParser = require('body-parser');
@@ -15,6 +13,9 @@ var cookieParser = require('cookie-parser');
 var resource = require('express-resource');
 
 var assert = require('assert');
+
+var app = express();
+var config = require('./config/config.json')[app.get('env')];
 
 db.connect(config.mongoUrl);
 
@@ -67,10 +68,9 @@ passport.use(new GoogleStrategy(config.GoogleStrategy,User.socialAuthenticate('g
 passport.use(new FacebookStrategy(config.FacebookStrategy,User.socialAuthenticate('facebook')));
 
 var routes = require('./routes/index');
-app.use('/', routes);
 
-// var usersHandler = require('./routes/users_res')(db);
-// app.resource('users', usersHandler);
+app.use('/', routes);
+app.resource('groups', require('./routes/group')());
 
 module.exports = app;
 

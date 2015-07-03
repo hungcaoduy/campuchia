@@ -1,6 +1,8 @@
 //a resourceful routing
-module.exports = function(mongoose) {
-	var UserModel = require('../models/user')();
+var mongoose = require('mongoose');
+
+module.exports = function() {
+	var UserModel = require('../models/user');
 	return {
 		//get users
 		index: function(request, response) {

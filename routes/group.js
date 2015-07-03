@@ -1,6 +1,8 @@
 //a resourceful routing
-module.exports = function(mongoose) {
-	var GroupModel = require('../models/group')();
+var mongoose = require('mongoose');
+
+module.exports = function() {
+	var GroupModel = require('../models/group');
 	var ensureAuthenticated = function(request, response) {
 		console.log('check authenticated 1');
 		if (!request.session.loggedIn) {
@@ -13,11 +15,10 @@ module.exports = function(mongoose) {
 	return {
 		//get groups
 		index: function(request, response) {
-
 			// if (ensureAuthenticated(request, response)) {
-			if (!request.session.loggedIn) {
+			if (false && !request.session.loggedIn) {
 				console.log('need to be logged');
-				response.send(401);
+				response.sendStatus(401);
 			} else {
 				console.log('group listing');
 			    return GroupModel.find(null, null, {skip: 0, limit: 100}, function(err, groups) {
@@ -29,17 +30,15 @@ module.exports = function(mongoose) {
 			    });
 			}
 		},
+		new: function( request, response) {
+			response.send('please create a create new form and submit to create');
+		},
 		//insert a new group
-		new: function(request, response) {
+		create: function(request, response) {
 		    var group = new GroupModel({
-		        title: request.body.title,
-		        description: request.body.description,
-		        effectiveDate: request.body.effectiveDate,
-		        keywords: [], //request.body.keywords,
-		        createdDate: new Date(),
-		        createdBy: 'Unknown',
-		        updatedDate: new Date(),
-		        updatedBy: 'Unknown'
+		        name: request.body.name,
+		        displayName: request.body.displayName,
+		        tags: request.body.tags
 		    });
 		    group.save(function(err) {
 		        if (!err) {
@@ -65,14 +64,9 @@ module.exports = function(mongoose) {
 		update: function( request, response ) {
 		    try {
 		        return GroupModel.findById( request.params.group, function( err, group ) {
-		            group.title = request.body.title;
-		            group.description = request.body.description;
-		            group.effectiveDate = request.body.effectiveDate;
-		            group.keywords = [];//request.body.keywords;
-		            group.createdDate = new Date();
-		            group.createdBy = 'Unknown';
-		            group.updatedDate = new Date();
-		            group.updatedBy = 'Unknown';
+			        group.name = request.body.name;
+			        group.displayName = request.body.displayName;
+			        group.tags = request.body.tags;
 		            return group.save( function( err ) {
 		                if( !err ) {
 		                    console.log( 'group updated' );
